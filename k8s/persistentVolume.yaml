@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testh2-persistentvolume
+  namespace: "testh2-namespace"
+  labels:
+    app: test
+    app.kubernetes.io/name: testapp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1G
+  storageClassName: ""
+  volumeMode: Filesystem
+  hostPath:
+    path: "/pv/h2"

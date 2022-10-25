@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testh2-deployment
+  namespace: "testh2-namespace"
+  labels:
+    app: testh2
+    app.kubernetes.io/name: testh2app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: testh2
+  template:
+    metadata:
+      labels:
+        app: testh2
+    spec:
+      containers:
+      - name: testh2app
+        image: ayatachibana/testh2:0.0.15
+        volumeMounts:
+        - mountPath: /mnt/h2
+          name: persistentvolume
+        ports:
+          - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /check
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 3
+          timeoutSeconds: 5
+        #livenessProbe:
+        #  tcpSocket:
+        #    port: 8081
+        #  initialDelaySeconds: 15
+      volumes:
+      - name: persistentvolume
+        persistentVolumeClaim:
+          claimName: testh2-persistentvolumeclaim
+  strategy:
+    type: RollingUpdate
