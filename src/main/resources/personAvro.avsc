@@ -1,0 +1,18 @@
+{
+    "type": "record",
+    "name": "PersonAvro",
+    "namespace": "com.example.demo.data",
+    "fields": [
+    {
+        "name": "id",
+        "type": "long"
+    },
+    {
+        "name": "name",
+        "type": "string"
+    },
+    {
+        "name": "age",
+        "type": "long"
+    }]
+}

@@ -1,7 +1,7 @@
-package com.example.demoh2.application;
+package com.example.demo.application;
 
-import com.example.demoh2.data.Person;
-import com.example.demoh2.repository.PersonRepository;
+import com.example.demo.person.data.Person;
+import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

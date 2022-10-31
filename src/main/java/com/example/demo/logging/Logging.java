@@ -1,4 +1,4 @@
-package com.example.demoh2.logging;
+package com.example.demo.logging;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Logging {
     private Logger log = LoggerFactory.getLogger(Logging.class);
 
-    @Pointcut("execution (* com.example.demoh2.endpoint.PersonEndpoint.*(..))")
+    @Pointcut("execution (* com.example.demo.endpoint.PersonEndpoint.*(..))")
     public void personEndpointLoggin() {
     }
 

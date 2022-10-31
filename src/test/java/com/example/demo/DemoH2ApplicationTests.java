@@ -1,6 +1,6 @@
-package com.example.demoh2;
+package com.example.demo;
 
-import com.example.demoh2.data.Person;
+import com.example.demo.person.data.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

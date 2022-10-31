@@ -1,6 +1,6 @@
-package com.example.demoh2.repository;
+package com.example.demo.repository;
 
-import com.example.demoh2.data.Person;
+import com.example.demo.person.data.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

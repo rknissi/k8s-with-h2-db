@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: testh2app
-        image: ayatachibana/testh2:0.0.27
+        image: ayatachibana/testh2:0.0.36
         volumeMounts:
         - mountPath: /mnt/h2
           name: persistentvolume

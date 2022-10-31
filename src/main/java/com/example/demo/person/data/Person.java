@@ -1,4 +1,4 @@
-package com.example.demoh2.data;
+package com.example.demo.person.data;
 
 import javax.persistence.*;
 
