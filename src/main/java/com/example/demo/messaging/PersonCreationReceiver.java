@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("!test")
-@RabbitListener(queues = "personCreationQueue")
 public class PersonCreationReceiver {
 
     @Autowired
@@ -22,8 +21,22 @@ public class PersonCreationReceiver {
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @RabbitHandler
+    @RabbitListener(queues = "personCreationQueue")
     public void receive(String person) throws JsonProcessingException {
-        Person createdPerson = personApplication.createPerson(objectMapper.readValue(person, Person.class));
+        System.out.println("Creating person from RabbitMQ:" + person);
+        Person newPerson = objectMapper.readValue(person, Person.class);
+        if (newPerson.getAge() == 0l) {
+            System.out.println("Error from RabbitMQ:" + person);
+            throw new RuntimeException("create.error");
+        } else {
+            System.out.println("Created from RabbitMQ:" + person);
+            Person createdPerson = personApplication.createPerson(newPerson);
+        }
     }
+
+    @RabbitListener(queues = "personCreationDLQ")
+    public void receiveDLQ(String person) throws JsonProcessingException {
+        System.out.println("Received Person from DLQ:" + person);
+    }
+
 }
