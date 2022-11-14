@@ -34,6 +34,14 @@ public class PersonCreationReceiver {
         }
     }
 
+    @RabbitListener(queues = "personCreationQueueAllHeaders")
+    public void receiveAllHeaders(String person) throws JsonProcessingException {
+        System.out.println("Creating person from RabbitMQ all headers:" + person);
+        Person newPerson = objectMapper.readValue(person, Person.class);
+        System.out.println("Created from RabbitMQ:" + person);
+        Person createdPerson = personApplication.createPerson(newPerson);
+    }
+
     @RabbitListener(queues = "personCreationDLQ")
     public void receiveDLQ(String person) throws JsonProcessingException {
         System.out.println("Received Person from DLQ:" + person);

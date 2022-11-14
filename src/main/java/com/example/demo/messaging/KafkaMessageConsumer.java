@@ -27,7 +27,7 @@ public class KafkaMessageConsumer {
     //ack.acknowledge();
 
     @KafkaListener(topics = "personCreation", containerFactory = "kafkaListenerContainerFactory")
-    public void listenGroupFoo(PersonAvro person) throws JsonProcessingException {
+    public void listenPersonCreation(PersonAvro person) throws JsonProcessingException {
         System.out.println("Received message from Kafka: " + person);
         if (person.getAge() == 0l) {
             System.out.println("Will not ack: " + person);
@@ -39,6 +39,11 @@ public class KafkaMessageConsumer {
             personApplication.createPerson(newPerson);
             System.out.println("Will ack: " + person);
         }
+    }
+
+    @KafkaListener(topics = "personCreationError", containerFactory = "kafkaListenerContainerFactory")
+    public void listenPersonCreationError(com.example.demo.data.PersonAvro person) throws JsonProcessingException {
+        System.out.println("Received message from Kafka and gave error: " + person);
     }
 
     @KafkaListener(topics = "personCreation.DLT")

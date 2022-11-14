@@ -30,6 +30,7 @@ public class KafkaMessageConfig {
     private String bootstrapAddress;
 
     //@Value(value = "${kafka.groupId}")
+    //private String groupid;
     private String groupid = String.valueOf(new Random().nextInt(50));
 
     @Value(value = "${schemaRegistry.bootstrapAddress}")
@@ -40,9 +41,11 @@ public class KafkaMessageConfig {
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapAddress);
+        //From which group the consumer is. If it's the same group, they will divide the consumer job
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
                 groupid);
+        //If it will consume all messages from the beggining
         props.put(
                 ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,
                 "earliest");
@@ -77,11 +80,6 @@ public class KafkaMessageConfig {
         DefaultErrorHandler defaultErrorHandler = new DefaultErrorHandler(new FixedBackOff(1000L, 3L));
 
         factory.setCommonErrorHandler(defaultErrorHandler);
-        //factory.setCommonErrorHandler(new DefaultErrorHandler(new FixedBackOff(1000L, 3L)));
-        //factory.setCommonErrorHandler(new DefaultErrorHandler(new ExponentialBackOff(1000L, 3L)));
-
-        //Necessário para commit manual
-        //factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
 
         return factory;
     }

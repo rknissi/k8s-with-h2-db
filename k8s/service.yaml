@@ -1,14 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: testh2-service
-  namespace: "testh2-namespace"
-  labels:
-    app: testh2
+  name: consumer-service
+  namespace: "consumer-namespace"
 spec:
   type: ClusterIP
   selector:
-    app: testh2
+    app: consumer-application
   ports:
   - protocol: TCP
     port: 81
